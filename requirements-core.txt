@@ -1,0 +1,11 @@
+# Core dependencies — install AFTER torch.
+# torch is NOT listed here because it needs a special index URL.
+# See requirements-cpu.txt or requirements-gpu.txt for torch install.
+#
+# Install order:
+#   1. pip install -r requirements-cpu.txt   (or requirements-gpu.txt)
+#   2. pip install -r requirements-core.txt
+
+whisperx
+customtkinter>=5.2.2
+Pillow>=9.0.0

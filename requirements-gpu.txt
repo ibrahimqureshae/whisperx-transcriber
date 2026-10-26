@@ -1,0 +1,9 @@
+# CUDA 12.1 PyTorch — NVIDIA GPU, ~2.5 GB download.
+# Requires NVIDIA driver 525+ and CUDA 12.x runtime.
+#
+# pip install -r requirements-gpu.txt
+# pip install -r requirements-core.txt
+
+--index-url https://download.pytorch.org/whl/cu121
+torch
+torchaudio
