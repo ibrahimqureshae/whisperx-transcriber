@@ -1,0 +1,10 @@
+# Build-time dependencies — not needed to run the app.
+#
+# pip install -r requirements-build.txt
+
+pyinstaller>=6.0
+Pillow>=9.0.0
+
+# Testing
+pytest>=8.0
+jiwer>=3.0

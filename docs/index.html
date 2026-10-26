@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhisperX Transcriber — Offline AI Transcription for Windows</title>
+  <meta name="description" content="Free offline AI transcription for Windows. Word-level timestamps, 99 languages, no cloud, no subscription. Powered by OpenAI Whisper.">
+  <meta property="og:title" content="WhisperX Transcriber">
+  <meta property="og:description" content="Offline AI transcription. No cloud. No subscription. Free forever.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ibrahimqureshae/whisperx-transcriber/main/assets/screenshots/Screenshot_new_ui.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f7f7f5;
+      --text: #1a1a18;
+      --text2: #5a5a56;
+      --border: rgba(0,0,0,0.1);
+      --accent: #1a6ef5;
+      --accent-bg: #e8f0fe;
+      --green: #0a7c4e;
+      --green-bg: #e6f4ee;
+      --radius: 10px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #141413;
+        --bg2: #1e1e1c;
+        --text: #e8e8e4;
+        --text2: #9a9a94;
+        --border: rgba(255,255,255,0.1);
+        --accent: #4d8ef7;
+        --accent-bg: #1a2540;
+        --green: #2ec07a;
+        --green-bg: #0d2b1e;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky; top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    nav .inner { max-width: 860px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-weight: 600; font-size: 15px; color: var(--text); }
+    .nav-links { display: flex; gap: 20px; font-size: 14px; color: var(--text2); }
+    .nav-links a { color: var(--text2); }
+
+    /* HERO */
+    .hero { text-align: center; padding: 72px 0 56px; }
+    .hero h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+    .hero .sub { font-size: 18px; color: var(--text2); max-width: 560px; margin: 0 auto 28px; line-height: 1.5; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 32px; }
+    .pill { font-size: 13px; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text2); background: var(--bg2); }
+    .pill.green { background: var(--green-bg); color: var(--green); border-color: transparent; }
+    .btn-dl { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 14px 28px; border-radius: var(--radius); font-size: 16px; font-weight: 600; text-decoration: none; }
+    .btn-dl:hover { opacity: 0.9; text-decoration: none; }
+    .btn-gh { display: inline-flex; align-items: center; gap: 8px; background: var(--bg2); color: var(--text); padding: 14px 22px; border-radius: var(--radius); font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); margin-left: 12px; }
+    .btn-gh:hover { background: var(--border); text-decoration: none; }
+
+    /* SCREENSHOT */
+    .screenshot { padding: 0 0 64px; text-align: center; }
+    .screenshot img { max-width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(0,0,0,0.12); }
+
+    /* FEATURES */
+    .features { padding: 64px 0; border-top: 1px solid var(--border); }
+    .section-title { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .section-sub { font-size: 16px; color: var(--text2); margin-bottom: 40px; }
+    .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .feat { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+    .feat-icon { font-size: 24px; margin-bottom: 10px; }
+    .feat h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .feat p { font-size: 14px; color: var(--text2); line-height: 1.5; }
+
+    /* STEPS */
+    .steps { padding: 64px 0; border-top: 1px solid var(--border); }
+    .step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-top: 40px; }
+    .step { text-align: center; }
+    .step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent-bg); color: var(--accent); font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .step h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .step p { font-size: 14px; color: var(--text2); line-height: 1.5; }
+
+    /* AUDIENCES */
+    .audiences { padding: 64px 0; border-top: 1px solid var(--border); }
+    .aud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 32px; }
+    .aud { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+    .aud-emoji { font-size: 28px; margin-bottom: 8px; }
+    .aud h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+    .aud p { font-size: 12px; color: var(--text2); }
+
+    /* FORMATS */
+    .formats { padding: 64px 0; border-top: 1px solid var(--border); }
+    .format-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .format-pill { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 18px; font-family: monospace; font-size: 14px; font-weight: 600; color: var(--text); }
+
+    /* SPONSOR */
+    .sponsor { padding: 64px 0; border-top: 1px solid var(--border); text-align: center; }
+    .sponsor p { color: var(--text2); max-width: 480px; margin: 12px auto 28px; font-size: 15px; }
+    .btn-sponsor { display: inline-flex; align-items: center; gap: 8px; background: var(--bg2); color: var(--text); padding: 12px 24px; border-radius: var(--radius); font-size: 15px; font-weight: 500; border: 1px solid var(--border); text-decoration: none; }
+    .btn-sponsor:hover { background: var(--border); text-decoration: none; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; text-align: center; font-size: 14px; color: var(--text2); }
+    footer a { color: var(--text2); margin: 0 10px; }
+
+    @media (max-width: 600px) {
+      .btn-gh { display: none; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <span class="nav-logo">WhisperX Transcriber</span>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="https://github.com/ibrahimqureshae/whisperx-transcriber">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <section class="hero">
+    <h1>Offline AI transcription.<br>Free forever.</h1>
+    <p class="sub">Word-level timestamps. 99 languages. Your audio never leaves your machine. No cloud. No subscription.</p>
+    <div class="pill-row">
+      <span class="pill green">✓ 100% offline</span>
+      <span class="pill green">✓ No subscription</span>
+      <span class="pill green">✓ Open source · MIT</span>
+      <span class="pill">Windows · macOS coming soon</span>
+    </div>
+    <a href="https://github.com/ibrahimqureshae/whisperx-transcriber/releases/latest" class="btn-dl">
+      ⬇️ Download for Windows
+    </a>
+    <a href="https://github.com/ibrahimqureshae/whisperx-transcriber" class="btn-gh">
+      ★ GitHub
+    </a>
+  </section>
+
+  <section class="screenshot">
+    <img src="https://raw.githubusercontent.com/ibrahimqureshae/whisperx-transcriber/main/assets/screenshots/Screenshot_new_ui.png"
+         alt="WhisperX Transcriber app screenshot">
+  </section>
+
+  <section class="features" id="features">
+    <h2 class="section-title">Everything you need. Nothing you don't.</h2>
+    <p class="section-sub">Powered by OpenAI's Whisper model and the fastest open-source inference stack available.</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-icon">🔒</div>
+        <h3>100% private</h3>
+        <p>Your audio never leaves your machine. No uploads, no API key, no account required.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">⚡</div>
+        <h3>Word-level timestamps</h3>
+        <p>Every word precisely timed — not just sentence segments. Essential for subtitles and content editing.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🌐</div>
+        <h3>99 languages</h3>
+        <p>Arabic, Urdu, Persian, Chinese, Hindi, and 94 more. Right-to-left scripts supported natively.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🖥️</div>
+        <h3>No terminal needed</h3>
+        <p>Extract the zip, double-click the exe, click through the setup wizard. That's it.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">🚀</div>
+        <h3>Up to 15× realtime</h3>
+        <p>On a modern NVIDIA GPU, WhisperX transcribes faster than realtime. CPU mode also available.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon">📦</div>
+        <h3>Multiple export formats</h3>
+        <p>SRT, VTT, TXT, TSV, JSON, and Word JSON. Export to whatever your workflow requires.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="steps" id="how-it-works">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-sub">Three steps. One-time setup. Offline forever.</p>
+    <div class="step-grid">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Download &amp; extract</h3>
+        <p>Download the ~19 MB zip from GitHub Releases. Extract anywhere. No installer, no admin rights.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Run setup wizard</h3>
+        <p>One-time download of the AI engine (~1–3 GB). The wizard handles everything automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Transcribe forever</h3>
+        <p>Fully offline from here on. Select a file, choose your model and output format, click Run.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="audiences">
+    <h2 class="section-title">Built for people who work with audio</h2>
+    <p class="section-sub">Any workflow, any language, any file.</p>
+    <div class="aud-grid">
+      <div class="aud"><div class="aud-emoji">🎙️</div><h3>Journalists</h3><p>Transcribe interviews with accurate timestamps</p></div>
+      <div class="aud"><div class="aud-emoji">📹</div><h3>Content creators</h3><p>Generate subtitles for videos in minutes</p></div>
+      <div class="aud"><div class="aud-emoji">🔬</div><h3>Researchers</h3><p>Batch-process lectures and fieldwork recordings</p></div>
+      <div class="aud"><div class="aud-emoji">📝</div><h3>Translators</h3><p>Get a timestamped base before translating</p></div>
+      <div class="aud"><div class="aud-emoji">🎓</div><h3>Students</h3><p>Transcribe recorded classes and seminars</p></div>
+      <div class="aud"><div class="aud-emoji">🔒</div><h3>Privacy-first</h3><p>Nothing ever uploaded anywhere</p></div>
+    </div>
+  </section>
+
+  <section class="formats">
+    <h2 class="section-title">Export formats</h2>
+    <p class="section-sub">Select multiple formats at once. All saved to the same output folder.</p>
+    <div class="format-row">
+      <div class="format-pill">SRT</div>
+      <div class="format-pill">VTT</div>
+      <div class="format-pill">TXT</div>
+      <div class="format-pill">TSV</div>
+      <div class="format-pill">JSON</div>
+      <div class="format-pill">word_json</div>
+    </div>
+  </section>
+
+  <section class="sponsor">
+    <h2 class="section-title">❤️ Support the project</h2>
+    <p>WhisperX Transcriber is free and will stay free. If it saves you time, consider sponsoring to fund new features — speaker diarization, macOS support, and more.</p>
+    <a href="https://github.com/sponsors/ibrahimqureshae" class="btn-sponsor">
+      ❤️ Sponsor on GitHub
+    </a>
+  </section>
+
+</div>
+
+<footer>
+  <div>
+    <a href="https://github.com/ibrahimqureshae/whisperx-transcriber">GitHub</a>
+    <a href="https://github.com/ibrahimqureshae/whisperx-transcriber/releases">Releases</a>
+    <a href="https://github.com/ibrahimqureshae/whisperx-transcriber/issues">Issues</a>
+    <a href="https://github.com/sponsors/ibrahimqureshae">Sponsor</a>
+  </div>
+  <div style="margin-top: 12px;">MIT License · Built on OpenAI Whisper, WhisperX, faster-whisper</div>
+</footer>
+
+</body>
+</html>
