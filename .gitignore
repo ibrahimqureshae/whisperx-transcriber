@@ -1,0 +1,74 @@
+# ── Python ────────────────────────────────────────────────────────────────────
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+
+# ── Build outputs ─────────────────────────────────────────────────────────────
+dist/
+dist_nuitka/
+build/
+
+# ── Models (large binaries — downloaded on first run, never commit) ───────────
+Models/
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.ggml
+*.onnx
+
+# ── First-run runtime venv (created by setup_wizard.py, never commit) ────────
+runtime/
+
+# ── HuggingFace / transformers cache ─────────────────────────────────────────
+.cache/
+
+# ── Transcription output (user-generated files) ───────────────────────────────
+*_words.json
+
+# ── Test / dev scratch files ─────────────────────────────────────────────────
+test audio file/
+test_audio.wav
+gen_test_audio.py
+test_deps.py
+build_log.txt
+context.md
+
+# ── Generated PDFs and archives ───────────────────────────────────────────────
+*.zip
+*.pdf
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+Thumbs.db
+desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+*.suo
+*.user
+
+
+# ── User data written beside the app when run from source ──────────────────────
+.whisperx.lock
+transcripts/
+*.corrupt-*
+settings.json
+queue.json

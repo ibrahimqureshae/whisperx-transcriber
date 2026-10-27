@@ -1,0 +1,8 @@
+# CUDA 12.8 PyTorch — NVIDIA GPU. Requires driver 560+ (CUDA 12.6+)
+#
+# pip install -r requirements-gpu.txt
+# pip install -r requirements-core.txt
+
+--index-url https://download.pytorch.org/whl/cu128
+torch~=2.8.0
+torchaudio~=2.8.0

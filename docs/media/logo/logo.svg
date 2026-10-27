@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d1d21"/>
+      <stop offset="1" stop-color="#0b0b0d"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.34" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff6a1a" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ff6a1a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="heat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb067"/>
+      <stop offset="0.55" stop-color="#ff6a1a"/>
+      <stop offset="1" stop-color="#ff5a0a"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <rect x="32" y="32" width="960" height="960" rx="224" fill="url(#bg)"/>
+  <rect x="32" y="32" width="960" height="960" rx="224" fill="url(#glow)"/>
+  <rect x="35" y="35" width="954" height="954" rx="221" fill="none" stroke="url(#rim)" stroke-width="6"/>
+  <!-- audio: three heat bars -->
+  <rect x="176" y="392" width="84" height="240" rx="42" fill="url(#heat)"/>
+  <rect x="300" y="232" width="84" height="560" rx="42" fill="url(#heat)"/>
+  <rect x="424" y="332" width="84" height="360" rx="42" fill="url(#heat)"/>
+  <!-- text: three speaker lanes -->
+  <rect x="572" y="330" width="276" height="84" rx="42" fill="#8b6cff"/>
+  <rect x="572" y="470" width="196" height="84" rx="42" fill="#ff3d8a"/>
+  <rect x="572" y="610" width="252" height="84" rx="42" fill="#f3efe8"/>
+</svg>

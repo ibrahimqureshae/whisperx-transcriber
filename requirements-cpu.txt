@@ -1,0 +1,9 @@
+# CPU-only PyTorch — no CUDA, smaller download (~600 MB for torch + torchaudio).
+# Use this on machines without an NVIDIA GPU (or to produce a smaller build).
+#
+# pip install -r requirements-cpu.txt
+# pip install -r requirements-core.txt
+
+--index-url https://download.pytorch.org/whl/cpu
+torch
+torchaudio
